@@ -1,3 +1,4 @@
+// Lista de eventos
 const eventos = [
     {
         id: 1,
@@ -41,14 +42,14 @@ const eventos = [
     }
 ];
 
+// Função para renderizar os cards de eventos
 function renderCards() {
-    const container = document.querySelector('.noticias'); 
+    const container = document.querySelector('.noticias');
     container.innerHTML = '';
 
     eventos.forEach(event => {
         const card = document.createElement('div');
         card.classList.add('card');
-        
         card.innerHTML = `
             <img src="${event.image}" alt="${event.title}">
             <div class="info">
@@ -58,35 +59,82 @@ function renderCards() {
                 <span class="material-icons-outlined">pin_drop</span> ${event.location}</p>
             </div>
         `;
-
         container.appendChild(card);
     });
 }
-renderCards();
 
-const hamburgerMenu = document.getElementById("hamburgerMenu");
-const menu = document.getElementById("menu");
+// Função para criar os cards do carrossel
+const carousel = document.querySelector('.carousel');
 
-hamburgerMenu.addEventListener("click", function() {
-    menu.classList.toggle("show");
+function createCarouselCards() {
+    eventos.forEach(event => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.innerHTML = `
+            <img src="${event.image}" alt="${event.title}">
+            <div class="info">
+                <h3>${event.title}</h3>
+                <p>${event.description}</p>
+                <p><span class="material-symbols-outlined icon">event</span> ${event.date} às ${event.time} <span class="material-symbols-outlined icon">pin_drop</span> ${event.location}</p>
+            </div>
+        `;
+        carousel.appendChild(card);
+    });
+}
+
+// Controle do carrossel
+let index = 0;
+
+function nextCard() {
+    index = (index + 1) % eventos.length;
+    updateCarousel();
+}
+
+function prevCard() {
+    index = (index - 1 + eventos.length) % eventos.length;
+    updateCarousel();
+}
+
+function updateCarousel() {
+    carousel.style.transform = `translateX(-${index * 100}%)`;
+}
+
+// Adicionando interatividade ao carrossel
+document.getElementById('nextBtn').addEventListener('click', nextCard);
+document.getElementById('prevBtn').addEventListener('click', prevCard);
+
+// Arrastar no celular
+let startX;
+carousel.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
 });
 
+carousel.addEventListener('touchend', (e) => {
+    let endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) nextCard();
+    if (endX - startX > 50) prevCard();
+});
+
+// Inicializando o carrossel e os cards de eventos
+createCarouselCards();
+
+// Inicialização do menu de temas e controle
 document.addEventListener("DOMContentLoaded", () => {
     const themeToggle = document.getElementById("themeToggle");
     const themeMenu = document.getElementById("themeMenu");
     const themeButtons = document.querySelectorAll(".theme-btn");
-    
+
     // Carregar tema salvo
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
         document.body.setAttribute("data-theme", savedTheme);
     }
-    
+
     // Mostrar/esconder menu de temas
     themeToggle.addEventListener("click", () => {
         themeMenu.classList.toggle("hidden");
     });
-    
+
     // Alterar tema e salvar no localStorage
     themeButtons.forEach(button => {
         button.addEventListener("click", (e) => {
@@ -98,3 +146,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// Renderiza os cards na área de notícias
+renderCards();
+
+// Controle do menu hamburguer
+const hamburgerMenu = document.getElementById("hamburgerMenu");
+const menu = document.getElementById("menu");
+
+hamburgerMenu.addEventListener("click", function() {
+    menu.classList.toggle("show");
+});
