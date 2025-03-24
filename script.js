@@ -64,6 +64,12 @@ function renderCards() {
 }
 renderCards();
 
+const hamburgerMenu = document.getElementById("hamburgerMenu");
+const menu = document.getElementById("menu");
+
+hamburgerMenu.addEventListener("click", function() {
+    menu.classList.toggle("show");
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     const themeToggle = document.getElementById("themeToggle");
