@@ -1,0 +1,191 @@
+/* Definição de Temas */
+:root {
+    --primary-color: #0072bb;
+    --secondary-color: #005f99;
+    --background-color: rgb(216, 216, 216);
+    --text-color: black;
+}
+
+[data-theme="dark"] {
+    --primary-color: #1e1e1e;
+    --secondary-color: #333;
+    --background-color: #121212;
+    --text-color: white;
+}
+
+[data-theme="inatel"] {
+    --primary-color: #1269d0;
+    --secondary-color: #005f99;
+    --background-color: #edf1f4;
+    --text-color: #000;
+}
+
+body {
+    font-family: 'Arimo', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+}
+
+span {
+    color: var(--secondary-color);
+}
+
+header {
+    padding-top: 20px;
+    width: 100%; /* Garante que o header ocupe toda a largura */
+    display: flex;
+    justify-content: center; /* Caso queira centralizar o conteúdo */
+    align-items: center; /* Alinha os itens verticalmente no centro */
+}
+
+
+h3 {
+    font-family: "Arimo", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    color: var(--cor-text);
+    padding-left: 5px;
+    padding-right: 5px
+}
+
+p {
+    font-family: "Arimo", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 11px;
+    color: var(--cor-text);
+    line-height: 1.5;
+    orphans: 3;
+    padding-left: 5px;
+    padding-right: 5px
+}
+
+
+.carousel-container {
+        position: relative;
+        overflow: hidden;
+        background-color: white;
+        border-radius: 10px;
+        margin: 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1)
+}
+
+.carousel {
+    display: realtive; /* mudaremos para flex posteriormente */
+}
+
+.card {
+    min-width: 100%;
+    text-align: center;
+    background-color: #fff;
+}
+
+.card img {
+    width: 100%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.info {
+    padding: 10px
+}
+
+.icon {
+    font-size: 15px;
+    margin-left: 5px;
+    margin-right: 2px;
+    width: 18px;
+    display: inline-block;
+    vertical-align: middle
+}
+
+
+button {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+    background: var(--secondary-color);
+    color: white;
+    border-radius: 5px;
+    margin-top: 1vh;
+    margin-right: 28.5vh;
+}
+
+#prevBtn { left: 10px; }
+#nextBtn { right: 10px; }
+
+
+button:hover {
+    background: var(--primary-color);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background: #e0e0e0;
+}
+
+.theme-btn {
+    margin: 5px;
+    padding: 10px 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: black;
+}
+
+.theme-btn:hover {
+    background: #ddd;
+}
+
+.hidden {
+    display: none;
+}
+
+.text-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
+    padding: 0 10px; 
+}
+
+
+
+
+@media (max-width: 896px) {
+    .text-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around; /* Ajusta para distribuir os itens */
+    }
+
+    .svg_logo_inatel {
+        width: 100px; /* Ajuste o tamanho do logo */
+        fill: var(--primary-color); /* Cor do SVG */
+    }
+
+    .mensagens, .aulas, .noticias {
+        padding: 10px;
+    }
+
+    .aulas-container {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .noticias h1 {
+        font-size: 20px;
+    }
+}
+
+
